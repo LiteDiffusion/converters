@@ -37,5 +37,8 @@ docker run --rm --name=aimet-dev-torch-cpu -v $PWD:$PWD -w $PWD -v /etc/localtim
 If you want to run the container for GPU, use the following command.
 
 ```bash
-docker run --rm --gpus all --name=aimet-dev-torch-gpu -v $PWD:$PWD -w $PWD -v /etc/localtime:/etc/localtime:ro -v /etc/timezone:/etc/timezone:ro --network=host --ulimit core=-1 --ipc=host --shm-size=8G --cap-add=SYS_PTRACE --security-opt seccomp=unconfined -it artifacts.codelinaro.org/codelinaro-aimet/aimet-dev:latest.torch-gpu
+docker run --rm --gpus all --name=aimet-dev-torch-gpu -v $PWD:$PWD -w $PWD -v /etc/localtime:/etc/localtime:ro -v /etc/timezone:/etc/timezone:ro --network=host --ulimit core=-1 --ipc=host --shm-size=8G --cap-add=SYS_PTRACE --security-opt seccomp=unconfined \
+    -e http_proxy="http://localhost:7890" \
+    -e https_proxy="http://localhost:7890" \
+    -it artifacts.codelinaro.org/codelinaro-aimet/aimet-dev:1.25.0.torch-gpu
 ```
