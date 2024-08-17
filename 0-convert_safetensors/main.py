@@ -25,6 +25,8 @@ def main(path: str):
     # Export and convert the text encoder
     pipe.text_encoder.save_pretrained(f"{dest_path}/text_encoder")
     convert_safetensors(f"{dest_path}/text_encoder")
+    if os.path.exists(f"{dest_path}/text_encoder/model.bin"):
+        os.rename(f"{dest_path}/text_encoder/model.bin", f"{dest_path}/text_encoder/pytorch_model.bin")
     # Export and convert the UNet
     pipe.unet.save_pretrained(f"{dest_path}/unet")
     convert_safetensors(f"{dest_path}/unet")
