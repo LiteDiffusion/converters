@@ -1,0 +1,11 @@
+onnx==1.6.0
+accelerate
+onnx_simplifier==0.4.8
+onnxruntime==1.10.0
+packaging
+torch==1.10.0
+transformers
+diffusers
+pytz>=2017.2
+numpy==1.23.5
+protobuf==3.19.6
