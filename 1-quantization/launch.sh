@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 pip install -r requirements.txt
 pip install --upgrade transformers==4.23.1 --no-deps
 pip install --upgrade onnx==1.13.0 --no-deps
