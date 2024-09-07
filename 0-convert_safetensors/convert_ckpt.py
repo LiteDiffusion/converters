@@ -7,9 +7,16 @@ from diffusers.pipelines import StableDiffusionPipeline
 @click.command()
 @click.argument('path', type=click.Path(exists=True))
 def main(path: str):
-    pipe = StableDiffusionPipeline.from_single_file(path, local_files_only=True)
+    if path.endswith(".safetensors"):
+        safe_serialization = True
+        dest_path = path.replace(".safetensors", "")
+    elif path.endswith(".ckpt"):
+        safe_serialization = False
+        dest_path = path.replace(".ckpt", "")
+    else:
+        raise ValueError("unsupported model file: " + path)
+    pipe = StableDiffusionPipeline.from_single_file(path, safe_serialization=safe_serialization, local_files_only=True)
     # Create the destination directory
-    dest_path = path.replace(".safetensors", "")
     os.makedirs(dest_path, exist_ok=True)
     # Export models
     pipe.text_encoder.save_pretrained(f"{dest_path}/text_encoder", safe_serialization=False)
