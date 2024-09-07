@@ -1,4 +1,5 @@
 import json
+import sys
 from argparse import Namespace
 
 import click
@@ -12,6 +13,10 @@ from redefined_modules.diffusers.models.unet_2d_condition import UNet2DCondition
 from redefined_modules.diffusers.models.vae import AutoencoderKLDecoder
 from stable_diff_pipeline import replace_mha_with_sha_blocks, run_the_pipeline, save_image
 from stable_diff_pipeline import run_tokenizer, run_text_encoder, run_diffusion_steps, run_vae_decoder
+
+
+sys.path.insert(0, '.')
+sys.setrecursionlimit(10000)
 
 
 @click.command()
